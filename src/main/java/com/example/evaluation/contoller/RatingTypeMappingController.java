@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/ratingtypemappings")
+@RequestMapping("/api/ratingTypeMappings")
 public class RatingTypeMappingController {
 
     private final RatingTypeMappingService service;
