@@ -28,22 +28,25 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 	implementation 'org.postgresql:postgresql:42.7.3'
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 	implementation 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
 	implementation 'org.flywaydb:flyway-core'
+	implementation 'org.flywaydb:flyway-database-postgresql'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 flyway {
-	url = 'jdbc:postgresql://localhost:5432/mydb'
+	url = 'jdbc:postgresql://localhost:5432/postgres'
 	user = 'postgres'
 	password = 'mypassword'
 	driver = 'org.postgresql.Driver'
-	locations = ['filesystem:src/main/resources/db/migration']
+	locations = ['filesystem:migration']
 }
 
 tasks.named('test') {
