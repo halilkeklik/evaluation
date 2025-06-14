@@ -51,13 +51,13 @@ public class UserController {
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PutMapping("/{userId}/change_email")
-    public ResponseEntity<String> changeEmail(@PathVariable Long userId, @Validated @RequestBody ChangeEmailDTO changeEmailDTO) {
+    public ResponseEntity<String> changeEmail(@PathVariable Long userId, @Validated @RequestBody ChangeEmailDTO changeEmailDTO) throws Exception {
         return new ResponseEntity<>(service.changeEmail(changeEmailDTO, userId), HttpStatus.OK);
     }
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PutMapping("/{userId}/change_password")
-    public ResponseEntity changePassword(@PathVariable Long userId, @Validated @RequestBody ChangePasswordDTO changePasswordDTO) throws CredentialException {
+    public ResponseEntity changePassword(@PathVariable Long userId, @Validated @RequestBody ChangePasswordDTO changePasswordDTO) throws Exception {
         service.changePassword(changePasswordDTO, userId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
