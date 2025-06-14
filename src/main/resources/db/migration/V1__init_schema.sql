@@ -1,4 +1,3 @@
-
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     email VARCHAR(255) UNIQUE NOT NULL
@@ -29,7 +28,7 @@ CREATE TABLE employee (
 CREATE TABLE rating_type (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    value INTEGER NOT NULL
+    rating_value INTEGER NOT NULL  -- burayı değiştirdim
 );
 
 CREATE TABLE business_rating (
