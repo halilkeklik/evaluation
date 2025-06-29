@@ -46,6 +46,12 @@ public class BusinessServiceImpl implements BusinessService {
     }
 
     @Override
+    public BusinessDto getByName(String name) {
+        if(repository.findByName(name).isEmpty()) return null;
+        return mapper.toDto(repository.findByName(name).get());
+    }
+
+    @Override
     public void deleteBusiness(Long id) {
         repository.deleteById(id);
     }

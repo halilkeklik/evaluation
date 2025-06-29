@@ -36,6 +36,8 @@ public class BusinessController {
     public BusinessDto update(@PathVariable Long id, @RequestBody BusinessDto dto) {
         return service.updateBusiness(id, dto);
     }
+    @GetMapping("/{name}")
+    public BusinessDto getByName(@PathVariable String name) {return service.getByName(name);}
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {

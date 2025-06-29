@@ -12,4 +12,5 @@ public interface BusinessService {
     BusinessDto getBusinessById(Long id);
     BusinessDto updateBusiness(Long id, BusinessDto dto);
     void deleteBusiness(Long id);
+    BusinessDto getByName(String name);
 }
