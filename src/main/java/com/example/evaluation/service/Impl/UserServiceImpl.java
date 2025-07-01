@@ -66,6 +66,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public long getUserCount() {
+
+        return repository.count();
+    }
+
+    @Override
     public String changeEmail(ChangeEmailDTO changeEmailDTO, Long userId) throws Exception {
         if (!currentUser.getUserId().equals(userId)) throw new Exception();
 

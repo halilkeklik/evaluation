@@ -2,11 +2,12 @@ package com.example.evaluation.service.Impl;
 
 import com.example.evaluation.dtos.LoginRequestDTO;
 import com.example.evaluation.dtos.RegisterRequestDTO;
+import com.example.evaluation.models.Role;
 import com.example.evaluation.models.User;
 import com.example.evaluation.repository.UserRepository;
 import com.example.evaluation.security.jwt.JwtUtil;
-import com.example.evaluation.security.user.UserRole;
 import com.example.evaluation.service.AuthService;
+import jakarta.transaction.Transactional;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
+@Transactional
 @Service
 public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
@@ -38,11 +40,8 @@ public class AuthServiceImpl implements AuthService {
                 .username(request.getUsername())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(UserRole.ROLE_USER)
+                .role(Role.ROLE_USER)
                 .build();
-
-        user = userRepository.save(user);
-
         userRepository.save(user);
     }
 

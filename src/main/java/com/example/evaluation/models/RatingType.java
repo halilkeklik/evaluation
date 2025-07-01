@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -19,5 +17,6 @@ public class RatingType {
     private Long id;
 
     private String name;
-    private int value;
+
+    private double ratingValue;
 }

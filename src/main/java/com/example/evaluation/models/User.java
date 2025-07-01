@@ -37,6 +37,7 @@ public class User {
     @OneToMany(mappedBy = "owner")
     private List<Business> ownedBusinesses;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private UserRole role;
+    private Role role;
 }

@@ -13,8 +13,6 @@ public class LoginRequestDTO {
     @Size(min = 6, max = 30)
     private String username;
 
-    @Pattern(
-            regexp = "^[a-zA-Z0-9@$!%?&]{8,30}$"
-    )
+    @Pattern(regexp = "^[a-zA-Z0-9@$!%?&.]{8,30}$", message = "password")
     private String password;
 }

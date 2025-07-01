@@ -10,4 +10,5 @@ public interface BusinessRatingService {
     BusinessRatingDto getBusinessRatingById(Long id);
     BusinessRatingDto updateBusinessRating(Long id, BusinessRatingDto dto);
     void deleteBusinessRating(Long id);
+    List<BusinessRatingDto> getBusinessRatingsByBusinessId(Long id);
 }

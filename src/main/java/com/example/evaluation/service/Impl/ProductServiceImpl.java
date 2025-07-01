@@ -1,10 +1,12 @@
 package com.example.evaluation.service.Impl;
 
+import com.example.evaluation.dtos.EmployeeDto;
 import com.example.evaluation.dtos.ProductDto;
 import com.example.evaluation.mapper.ProductMapper;
 import com.example.evaluation.models.Product;
 import com.example.evaluation.repository.ProductRepository;
 import com.example.evaluation.service.ProductService;
+import com.example.evaluation.service.RatingTypeMappingService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,10 +18,12 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository repository;
     private final ProductMapper mapper;
+    private final RatingTypeMappingService ratingTypeMappingService;
 
-    public ProductServiceImpl(ProductRepository repository, ProductMapper mapper) {
+    public ProductServiceImpl(ProductRepository repository, ProductMapper mapper, RatingTypeMappingService ratingTypeMappingService) {
         this.repository = repository;
         this.mapper = mapper;
+        this.ratingTypeMappingService = ratingTypeMappingService;
     }
 
     @Override
@@ -35,7 +39,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto getProductById(Long id) {
-        return repository.findById(id).map(mapper::toDto).orElse(null);
+        ProductDto dto = repository.findById(id).map(mapper::toDto).orElse(null);
+        assert false;
+        dto.setAvgRating(ratingTypeMappingService.findAverageRatingByProductId(id));
+        return dto;
     }
 
     @Override

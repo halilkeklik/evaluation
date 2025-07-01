@@ -41,13 +41,6 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
-flyway {
-	url = 'jdbc:postgresql://localhost:5432/postgres'
-	user = 'postgres'
-	password = 'mypassword'
-	driver = 'org.postgresql.Driver'
-	locations = ['filesystem:migration']
-}
 
 tasks.named('test') {
 	useJUnitPlatform()

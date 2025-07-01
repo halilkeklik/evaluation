@@ -20,6 +20,9 @@ public interface UserService {
 
     UserDto getUserByName(String name);
 
+    long getUserCount();
+
+
     String changeEmail(ChangeEmailDTO changeEmailDTO, Long userId) throws Exception;
 
     void changePassword(ChangePasswordDTO changePasswordDTO, Long userId) throws Exception;

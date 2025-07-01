@@ -1,6 +1,8 @@
 package com.example.evaluation.service;
 
 import com.example.evaluation.dtos.ProductRatingDto;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 

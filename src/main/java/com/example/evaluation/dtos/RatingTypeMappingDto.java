@@ -10,7 +10,14 @@ public class RatingTypeMappingDto {
 
     private Long businessRatingId;
 
+    private Double businessAvgRating;
+
     private Long productRatingId;
 
+    private Double productAvgRating;
+
     private Long employeeRatingId;
+
+    private Double employeeAvgRating;
+
 }

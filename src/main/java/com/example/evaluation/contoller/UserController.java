@@ -37,11 +37,13 @@ public class UserController {
         return service.getUserById(id);
     }
 
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PutMapping("/{id}")
     public UserDto update(@PathVariable Long id, @RequestBody UserDto dto) {
         return service.updateUser(id, dto);
     }
 
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         service.deleteUser(id);
@@ -59,5 +61,10 @@ public class UserController {
     public ResponseEntity changePassword(@PathVariable Long userId, @Validated @RequestBody ChangePasswordDTO changePasswordDTO) throws Exception {
         service.changePassword(changePasswordDTO, userId);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<Long> getUserCount() {
+        return ResponseEntity.ok(service.getUserCount());
     }
 }

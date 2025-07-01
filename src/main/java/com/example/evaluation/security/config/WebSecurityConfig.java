@@ -18,6 +18,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
+
 
 @Configuration
 @EnableMethodSecurity
@@ -30,6 +36,20 @@ public class WebSecurityConfig {
 
     @Autowired
     public TokenFilter tokenFilter;
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowedOrigins(List.of("http://localhost:3000"));  // React origin
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(List.of("*"));
+        config.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+
+        return source;
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -58,10 +78,16 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth ->
                         auth
                                 .requestMatchers("/api/auth/**").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/api/profiles/**").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/api/communities/**").permitAll()
-                                .requestMatchers("/api/popular/**").permitAll()
-                                .requestMatchers("/api/search/**").permitAll()
+                                .requestMatchers("/error").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/businesses/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/businessRatings/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/employees/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/employeeRatings/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/products/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/productRatings/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/ratingTypes/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/ratingTypeMappings/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/users/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())

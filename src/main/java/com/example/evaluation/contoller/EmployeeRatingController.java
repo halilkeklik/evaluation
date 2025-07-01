@@ -2,6 +2,7 @@ package com.example.evaluation.contoller;
 
 import com.example.evaluation.dtos.EmployeeRatingDto;
 import com.example.evaluation.service.EmployeeRatingService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,11 +32,13 @@ public class EmployeeRatingController {
         return service.getEmployeeRatingById(id);
     }
 
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PutMapping("/{id}")
     public EmployeeRatingDto update(@PathVariable Long id, @RequestBody EmployeeRatingDto dto) {
         return service.updateEmployeeRating(id, dto);
     }
 
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         service.deleteEmployeeRating(id);

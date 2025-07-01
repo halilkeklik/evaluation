@@ -1,6 +1,8 @@
 package com.example.evaluation.service.Impl;
 
+import com.example.evaluation.dtos.BusinessDto;
 import com.example.evaluation.dtos.BusinessRatingDto;
+import com.example.evaluation.dtos.ProductDto;
 import com.example.evaluation.mapper.BusinessRatingMapper;
 import com.example.evaluation.models.BusinessRating;
 import com.example.evaluation.repository.BusinessRatingRepository;
@@ -16,7 +18,7 @@ public class BusinessRatingServiceImpl implements BusinessRatingService {
     private final BusinessRatingRepository repository;
     private final BusinessRatingMapper mapper;
 
-    public BusinessRatingServiceImpl(BusinessRatingRepository repository, BusinessRatingMapper mapper) {
+    public BusinessRatingServiceImpl(BusinessRatingRepository repository, BusinessRatingMapper mapper, RatingTypeMappingServiceImpl ratingTypeMappingService) {
         this.repository = repository;
         this.mapper = mapper;
     }
@@ -45,8 +47,18 @@ public class BusinessRatingServiceImpl implements BusinessRatingService {
         return mapper.toDto(repository.save(entity));
     }
 
+
     @Override
     public void deleteBusinessRating(Long id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public List<BusinessRatingDto> getBusinessRatingsByBusinessId(Long id) {
+        List<BusinessRating> ratings = repository.findByBusinessId(id);
+        return ratings.stream()
+                .map(mapper::toDto)
+                .collect(Collectors.toList());
+    }
+
 }
